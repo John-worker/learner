@@ -1,0 +1,16 @@
+#!/bin/bash
+IFS=$'\n'
+for filename in $(ls ~/MUSIC|grep mp3)
+do
+new=`echo $filename|sed 's/[^a-zA-Z0-9]//g'|sed 's/mp3/\.mp3/g'`
+for i in `seq 4`
+do
+if [ -f "$new" ];then
+new=`echo $new|sed 's/\.mp3//g'`
+new=${new}"_"${i}".mp3"
+else
+mv $filename $new
+break
+fi
+done
+done
